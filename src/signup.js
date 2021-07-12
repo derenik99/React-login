@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import {Link} from 'react-router-dom'
 
 class SignUp extends React.Component {
     state = {
@@ -6,6 +7,19 @@ class SignUp extends React.Component {
         lastName: '',
         email: '',
         password: ''
+    }
+
+    validateEmail = () => {
+        const {email} = this.state; 
+        if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)){
+            return (true)
+        }
+        alert("You have entered an invalid email address!")
+        return (false)
+    }
+    validatePassword = () => {
+        const {password} = this.state;
+        return password.length > 6
     }
     handleRegister = () => {
         const {firstName, lastName, email,password} = this.state;
@@ -29,6 +43,11 @@ class SignUp extends React.Component {
                     })
                 }
             })
+    }
+    register = () => {
+        if(this.validateEmail() && this.validatePassword()) {
+            this.handleRegister()
+        }
     }
     handleChange = (e) =>{
         this.setState({
@@ -64,7 +83,10 @@ class SignUp extends React.Component {
                         <input name = 'password' value = {password} type= "password" onChange = {this.handleChange} />
                     </label>
                 </p>   
-                <button onClick = {this.handleRegister}>Register</button>
+                <button onClick = {this.register} >Register</button>
+                <h3>
+                    <Link to='/login'>Do You have a account ? </Link>
+                </h3>
             </div>
         )
     }

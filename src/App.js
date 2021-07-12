@@ -7,6 +7,7 @@ import {
 import Login from './login';
 import SignUp from "./signup";
 import Welcome  from "./welcome";
+import Home from "./home";
 import './App.css';
 
 function App () {
@@ -21,6 +22,9 @@ function App () {
           </Route>
           <Route path="/" exact={true}>
             <Welcome />
+          </Route>
+          <Route path="/home" exact={true}>
+            <Home />
           </Route>
         </Switch>
     </Router>

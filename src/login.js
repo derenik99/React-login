@@ -6,6 +6,14 @@ class Login extends React.Component {
         email: '',
         password: ''
     }
+    validateEmail = () => {
+        const {email} = this.state
+        if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)){
+            return (true)
+        }
+        alert("You have entered an invalid email address!")
+        return (false)
+    }
     handleLogin = () => {
         const {email,password} = this.state;
         fetch(`http://localhost:3001/users?email=${email}&password=${password}`)
@@ -15,9 +23,14 @@ class Login extends React.Component {
                     alert('Wrong email or password')
                 }else {
                     localStorage.setItem('id', data[0].id)
-                    this.props.history.push('/')
+                    this.props.history.push('/home')
                 }
             })
+    }
+    login = () => {
+        if(this.validateEmail()) {
+            this.handleLogin()
+        }
     }
     handleChange = (e) =>{
         this.setState({
@@ -41,7 +54,7 @@ class Login extends React.Component {
                         <input name='password' type= "password" value = {password} onChange = {this.handleChange} />
                     </label>
                 </p>
-                <button onClick={this.handleLogin}>Login</button>
+                <button onClick={this.login}>Login</button>
                 <h3>
                     <Link to='/signup'>Dont have account ? </Link>
                 </h3>
