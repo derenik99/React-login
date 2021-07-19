@@ -1,21 +1,15 @@
-import {    withRouter,Redirect} from "react-router-dom";
+import {  Link,  withRouter, Redirect} from "react-router-dom";
+import {connect} from 'react-redux';
+import { getProfile } from "./store/actions/user.profiel.actions";
 import React from 'react';
 
 class Home  extends React.Component {
-    state = {
-        firstName: '',
-        lastName: ''
-    }
-
 
     componentDidMount() {
         fetch(`http://localhost:3001/users/${localStorage.getItem('id')}`)
         .then(response => response.json())
         .then(data => {
-            this.setState({
-                firstName: data.firstName,
-                lastName: data.lastName
-            });
+            this.props.getProfile(data);
         })
     }
     logout = () => {
@@ -26,20 +20,25 @@ class Home  extends React.Component {
 
         return (
             <>
-                {
-                    localStorage.getItem('id') ? <>
-                        <h2>Hi {this.state.firstName} {this.state.lastName}</h2>
+                        <Link to={'/profile'}><button>Profile</button></Link>
+                        <Link to = {'/users'}><button>Users</button></Link>
+                        <br />
                         <button onClick={this.logout}>Logout</button>
-                    </>: <Redirect 
-                        to={{
-                            pathname: "/",
-                          }}
-                    />
-                }
             </>
         )
     }
 
 }
 
-export default withRouter(Home)
+const mapStateToProps = (state) => {
+    return {
+        firstName: state.profile.firstName,
+        lastName: state.profile.lastName,
+    }
+}
+
+const mapDispatchToProps = {
+    getProfile
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))

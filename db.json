@@ -1,11 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "email": "email@email.com",
-      "password": "12345"
-    },
-    {
       "firstName": "12",
       "lastName": "21",
       "email": "12",
@@ -39,6 +34,13 @@
       "email": "mail@mail.com",
       "password": "1234567",
       "id": 6
+    },
+    {
+      "firstName": "hgfh",
+      "lastName": "fghgf",
+      "email": "mail@mail.ru",
+      "password": "dfgfdgdf",
+      "id": 7
     }
   ]
 }

@@ -8,6 +8,9 @@ import Login from './login';
 import SignUp from "./signup";
 import Welcome  from "./welcome";
 import Home from "./home";
+import { PrivateRoute } from "./utils/privateRoute";
+import Profile from './profile';
+import Users from "./users";
 import './App.css';
 
 function App () {
@@ -23,9 +26,15 @@ function App () {
           <Route path="/" exact={true}>
             <Welcome />
           </Route>
-          <Route path="/home" exact={true}>
+          <PrivateRoute path="/home" exact={true}>
             <Home />
-          </Route>
+          </PrivateRoute>
+          <PrivateRoute path = '/profile' exact = {true}>
+            <Profile />
+          </PrivateRoute>
+          <PrivateRoute path='/users' exact={true}>
+            <Users />
+          </PrivateRoute>
         </Switch>
     </Router>
   )

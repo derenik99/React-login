@@ -1,5 +1,7 @@
 import React from "react"
 import { Link, withRouter } from "react-router-dom"
+import {connect} from 'react-redux'
+import {getProfile} from './store/actions/user.profiel.actions';
 
 class Login extends React.Component {
     state = {
@@ -23,6 +25,7 @@ class Login extends React.Component {
                     alert('Wrong email or password')
                 }else {
                     localStorage.setItem('id', data[0].id)
+                    this.props.getProfile(data[0]);
                     this.props.history.push('/home')
                 }
             })
@@ -63,5 +66,8 @@ class Login extends React.Component {
     }
 }
 
+const mapDispatchToProps = {
+    getProfile
+}
 
-export default withRouter(Login);
+export default connect(null, mapDispatchToProps)(withRouter(Login));
